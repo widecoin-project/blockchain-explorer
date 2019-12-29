@@ -1574,10 +1574,10 @@
 										switchPage('transaction', [search])
 									}
 								})
-							} else if (search.length == 34 || search.substring(0, 3) == getApi()['hrp']) {
+							} else if (search.length == 34 || search.substring(0, 5) == getApi()['hrp']) {
 								switchPage('address', [search])
 							} else {
-								showMessage(errorMessages['search-error'])
+								showError(errorMessages['search-error'])
 							}
 						}
 					}
