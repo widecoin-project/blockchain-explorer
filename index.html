@@ -61,6 +61,13 @@
 			.modal-dialog {
 				max-width: 530px;
 			}
+			.mono-amount {
+				font-family: monospace;
+				font-size: 14px;
+			}
+			small .mono-amount {
+				font-size: 12px;
+			}
 		</style>
 		<title>Blockchain Explorer</title>
 		<meta name="description" content="Sugarchain Blockchain Explorer">
@@ -1321,7 +1328,7 @@
 			// Convert satoshis to readable amount
 			function amountFormat(amount) {
 				var decimals = getApi()['decimals']
-				return delimitNumbers(parseFloat((amount / Math.pow(10, decimals)).toFixed(decimals)))
+				return `<span class="mono-amount">${parseFloat((amount / Math.pow(10, decimals)).toFixed(decimals))}</span>`
 			}
 
 			// Convert timestamp to readable date
@@ -1338,13 +1345,6 @@
 
 				return convdataTime
 			}
-
-			function delimitNumbers(str) {
-				return (str + "").replace(/\b(\d+)((\.\d+)*)\b/g, function(a, b, c) {
-					return (b.charAt(0) > 0 && !(c || ".").lastIndexOf(".") ? b.replace(/(\d)(?=(\d{3})+$)/g, "$1,") : b) + c;
-				})
-			}
-
 
 			// Show big error message at the top of the page :D 
 			function showError(message) {
