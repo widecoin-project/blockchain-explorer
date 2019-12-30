@@ -887,7 +887,7 @@
 									</tr>
 									<tr>
 										<td>Amount Transferred</td>
-										<td>${amountFormat(data.amount)} <b>${getApi()['ticker']}</b></td>
+										<td class="mono-amount">${amountFormat(data.amount)} <b>${getApi()['ticker']}</b></td>
 									</tr>
 									<tr>
 										<td>Size</td>
@@ -947,11 +947,11 @@
 									</tr>
 									<tr>
 										<td>Received</td>
-										<td>${amountFormat(data.received)} <b>${getApi()['ticker']}</b></td>
+										<td class="mono-amount">${amountFormat(data.received)} <b>${getApi()['ticker']}</b></td>
 									</tr>
 									<tr>
 										<td>Balance</td>
-										<td>${amountFormat(data.balance)} <b>${getApi()['ticker']}</b></td>
+										<td class="mono-amount">${amountFormat(data.balance)} <b>${getApi()['ticker']}</b></td>
 									</tr>
 								</tbody>
 							</table>
@@ -1059,7 +1059,7 @@
 						<li class="list-group-item">
 							<b>Total fee:</b>
 							<small class="float-right text-muted">
-								${amountFormat(status.fee)} <b>${getApi()['ticker']}</b>
+								<span class="mono-amount">${amountFormat(status.fee)}</span> <b>${getApi()['ticker']}</b>
 							</small>
 						</li>`
 
@@ -1167,7 +1167,7 @@
 										</div>
 										<div class="col-md-3 col-sm-12 col-xs-12 text-md-right">
 											<small class="text-muted">
-												${amountFormat(vout.value)} <b>${getApi()['ticker']}</b>
+												<span class="mono-amount">${amountFormat(status.fee)}</span> <b>${getApi()['ticker']}</b>
 											</small>
 										</div>
 									</div>
@@ -1208,7 +1208,7 @@
 									</div>
 									<div class="col-md-3 col-sm-12 col-xs-12 text-md-right">
 										<small class="text-muted">
-											${amountFormat(vin.value)} <b>${getApi()['ticker']}</b>
+											<span class="mono-amount">${amountFormat(status.fee)}</span> <b>${getApi()['ticker']}</b>
 										</small>
 									</div>
 								</div>
@@ -1252,6 +1252,9 @@
 					var height = data.result.blocks
 					var display_height = Number($('#blocks-table tbody tr:first-child').attr('data-height'))
 
+					circulatingSupply = parseInt(amountFormat(data.result.supply))
+					$('#supply span').text(circulatingSupply.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + getApi()['ticker']);
+
 					if (height != display_height || $('#blocks-table tbody tr').length > 0) {
 						getBlocks(height).then(function(blocks) {
 							if (blocks['error'] == undefined) {
@@ -1281,16 +1284,6 @@
 							}
 						})
 					}
-
-					// Display circulating supply
-					networkSupply().then(function(data) {
-						if(data['error'] == undefined) {
-							circulatingSupply = parseInt(amountFormat(data.result.supply))
-							$('#supply span').text(circulatingSupply.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + getApi()['ticker']);
-						} else {
-							showError(errorMessages['circulating-supply-load-error'])
-						}
-					});
 				})
 			}
 
@@ -1328,7 +1321,7 @@
 			// Convert satoshis to readable amount
 			function amountFormat(amount) {
 				var decimals = getApi()['decimals']
-				return `<span class="mono-amount">${parseFloat((amount / Math.pow(10, decimals)).toFixed(decimals))}</span>`
+				return parseFloat((amount / Math.pow(10, decimals)).toFixed(decimals))
 			}
 
 			// Convert timestamp to readable date
