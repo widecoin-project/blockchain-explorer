@@ -287,6 +287,14 @@
 			}
 
 			function showCharts(data) {
+				var step = 2
+
+				if ($(document).width() < 576) {
+					step = 9
+				} else if ($(document).width() < 1200) {
+					step = 4
+				}
+
 				$('#charts').removeClass('d-none')
 				Highcharts.chart('network-chart', {
 					'chart': {
@@ -301,7 +309,7 @@
 						'crosshair': true,
 						'labels': {
 							'enabled': true,
-							'step': 2
+							'step': step
 						}
 					}],
 					'yAxis': [{
