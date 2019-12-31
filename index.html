@@ -301,7 +301,10 @@
 				Highcharts.chart('network-chart', {
 					'chart': {
 						'type': 'spline',
-						'height': 240
+						'height': 240,
+						'marginLeft': 40, // Keep all charts left aligned
+						'spacingTop': 20,
+						'spacingBottom': 20
 					},
 					'title': {
 						'text': ''
@@ -370,6 +373,7 @@
 					},
 					'plotOptions': {
 						'series': {
+							'animation': false,
 							'label': {
 								'connectorAllowed': true
 							},
@@ -1602,7 +1606,7 @@
 
 				window.setInterval(function() {
 					displayHome()
-				}, 15000);
+				}, 10000);
 			})
 		</script>
 	</body>
