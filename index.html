@@ -929,7 +929,19 @@
 				$('#tx-vout-list').empty()
 				$('#tx-vin-list').empty()
 
-				displayTxVout(data.vout)
+				var vin_amount = 0
+				data.vin.forEach(function(vin) {
+					vin_amount += vin.value
+				})
+
+				var vout_amount = 0
+				data.vout.forEach(function(vout) {
+					vout_amount += vout.value
+				})
+
+				var fee = vin_amount - vout_amount
+
+				displayTxVout(data.vout, fee)
 				displayTxVin(data.vin)
 
 				$('#tx-info-vout-total').removeClass('d-none')
@@ -1173,7 +1185,7 @@
 				loadTransactions(holder)
 			}
 
-			function displayTxVout(vout_list) {
+			function displayTxVout(vout_list, fee = 0) {
 				vout_list.forEach(function(vout, index) {
 					if ($('#tx-vout-list').find(`[data-tx-vout-index="${index}"]`).length == 0) {
 						if (vout.scriptPubKey.type != 'nulldata') {
@@ -1206,6 +1218,17 @@
 						}
 					}
 				})
+
+				if (fee > 0) {
+					$('#tx-vout-list').append(`
+						<li class="list-group-item">
+							<b>Total fee:</b>
+							<small class="float-right text-muted">
+								<span class="text-monospace">${amountFormat(fee)}</span> <b>${getApi()['ticker']}</b>
+							</small>
+						</li>
+					`)
+				}
 			}
 
 			function displayTxVin(vin_list) {
