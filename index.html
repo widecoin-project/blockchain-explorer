@@ -64,11 +64,10 @@
 			.modal-dialog {
 				max-width: 530px;
 			}
-			.mono-amount {
-				font-family: monospace;
-				font-size: 13px;
+			.text-monospace {
+				font-size: 14px;
 			}
-			small .mono-amount {
+			small .text-monospace {
 				font-size: 12px;
 			}
 		</style>
@@ -898,7 +897,7 @@
 									</tr>
 									<tr>
 										<td>Amount Transferred</td>
-										<td><span class="mono-amount">${amountFormat(data.amount)}</span> <b>${getApi()['ticker']}</b></td>
+										<td><span class="text-monospace">${amountFormat(data.amount)}</span> <b>${getApi()['ticker']}</b></td>
 									</tr>
 									<tr>
 										<td>Size</td>
@@ -958,11 +957,11 @@
 									</tr>
 									<tr>
 										<td>Received</td>
-										<td><span class="mono-amount">${amountFormat(data.received)}</span> <b>${getApi()['ticker']}</b></td>
+										<td><span class="text-monospace">${amountFormat(data.received)}</span> <b>${getApi()['ticker']}</b></td>
 									</tr>
 									<tr>
 										<td>Balance</td>
-										<td><span class="mono-amount">${amountFormat(data.balance)}</span> <b>${getApi()['ticker']}</b></td>
+										<td><span class="text-monospace">${amountFormat(data.balance)}</span> <b>${getApi()['ticker']}</b></td>
 									</tr>
 								</tbody>
 							</table>
@@ -1030,7 +1029,7 @@
 							<span class="entypo up text-danger"></span>
 							<span class="text-primary">${address}</span>
 							<small class="float-right text-muted">
-								<span class="mono-amount">${transfer_amount}</span>
+								<span class="text-monospace">${transfer_amount}</span>
 							</small>
 						</a>`
 
@@ -1061,7 +1060,7 @@
 							<span class="entypo down text-success"></span>
 							<span class="text-primary">${address}</span>
 							<small class="float-right text-muted">
-								<span class="mono-amount">${transfer_amount}</span>
+								<span class="text-monospace">${transfer_amount}</span>
 							</small>
 						</a>`
 
@@ -1074,7 +1073,7 @@
 						<li class="list-group-item">
 							<b>Total fee:</b>
 							<small class="float-right text-muted">
-								<span class="mono-amount">${amountFormat(status.fee)}</span> <b>${getApi()['ticker']}</b>
+								<span class="text-monospace">${amountFormat(status.fee)}</span> <b>${getApi()['ticker']}</b>
 							</small>
 						</li>`
 
@@ -1182,7 +1181,7 @@
 										</div>
 										<div class="col-md-3 col-sm-12 col-xs-12 text-md-right">
 											<small class="text-muted">
-												<span class="mono-amount">${amountFormat(vout.value)}</span> <b>${getApi()['ticker']}</b>
+												<span class="text-monospace">${amountFormat(vout.value)}</span> <b>${getApi()['ticker']}</b>
 											</small>
 										</div>
 									</div>
@@ -1223,7 +1222,7 @@
 									</div>
 									<div class="col-md-3 col-sm-12 col-xs-12 text-md-right">
 										<small class="text-muted">
-											<span class="mono-amount">${amountFormat(vin.value)}</span> <b>${getApi()['ticker']}</b>
+											<span class="text-monospace">${amountFormat(vin.value)}</span> <b>${getApi()['ticker']}</b>
 										</small>
 									</div>
 								</div>
